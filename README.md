@@ -1,6 +1,6 @@
 # synthesis-methods
 
-A shared registry of DNA-synthesis method definitions: vendor capabilities, sequence-length and library-size limits, error and skew estimates, and pricing. Each method is a TOML file parsed into a small `SynthesisMethod` model.
+A shared registry of commercial DNA synthesis method definitions: vendor capabilities, sequence-length and library-size limits, error and skew estimates, and pricing. Each method is a TOML file parsed into a small `SynthesisMethod` model.
 
 ## Use
 
