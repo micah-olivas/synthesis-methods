@@ -1,8 +1,6 @@
 # synthesis-methods
 
-A shared registry of DNA-synthesis method definitions: vendor capabilities, sequence-length and library-size limits, error and skew estimates, and pricing. Each method is a TOML file parsed into a small `SynthesisMethod` model. Both `usortm` and `library_designer` read from here, so the numbers live in one place instead of being copied between tools.
-
-This package holds the data and the loader. It does not compute cost; a caller that needs cost (uSort-M) reads `method.pricing` and does its own math.
+A shared registry of DNA-synthesis method definitions: vendor capabilities, sequence-length and library-size limits, error and skew estimates, and pricing. Each method is a TOML file parsed into a small `SynthesisMethod` model.
 
 ## Use
 
