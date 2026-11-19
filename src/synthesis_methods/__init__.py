@@ -19,6 +19,7 @@ from .loader import (
     load_all_methods,
     load_method,
     platform_type,
+    user_methods_dirs,
 )
 from .model import SynthesisMethod
 
@@ -30,6 +31,7 @@ __all__ = [
     "get_method",
     "find_methods",
     "platform_type",
+    "user_methods_dirs",
     "METHODS_DIR",
     "__version__",
 ]

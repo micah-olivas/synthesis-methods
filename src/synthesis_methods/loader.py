@@ -1,6 +1,7 @@
 """Load and query the bundled synthesis-method registry."""
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -12,6 +13,7 @@ else:
 from .model import SynthesisMethod
 
 METHODS_DIR = Path(__file__).parent / "data" / "methods"
+ENV_VAR = "SYNTHESIS_METHODS_PATH"
 
 
 def load_method(path) -> SynthesisMethod:
@@ -21,11 +23,31 @@ def load_method(path) -> SynthesisMethod:
         return SynthesisMethod(path.stem, tomllib.load(f))
 
 
+def user_methods_dirs() -> list:
+    """Extra method directories read after the bundled registry: each entry of
+    ``SYNTHESIS_METHODS_PATH`` (``os.pathsep``-separated), then
+    ``~/.config/synthesis-methods/methods`` if it exists. These hold method
+    definitions that are not distributed with the package, such as quoted
+    pricing."""
+    dirs = [Path(p).expanduser() for p in os.environ.get(ENV_VAR, "").split(os.pathsep) if p]
+    default = Path.home() / ".config" / "synthesis-methods" / "methods"
+    if default.is_dir():
+        dirs.append(default)
+    return dirs
+
+
 def load_all_methods(methods_dir=None) -> dict:
-    """All methods as a dict keyed by slug. Reads the bundled registry unless
-    ``methods_dir`` points elsewhere."""
-    d = Path(methods_dir) if methods_dir else METHODS_DIR
-    return {m.slug: m for m in (load_method(p) for p in sorted(d.glob("*.toml")))}
+    """All methods as a dict keyed by slug. With no ``methods_dir``, reads the
+    bundled registry, then each of ``user_methods_dirs()``; a later file
+    replaces an earlier one with the same slug. With ``methods_dir``, reads
+    only that directory."""
+    dirs = [Path(methods_dir)] if methods_dir else [METHODS_DIR, *user_methods_dirs()]
+    methods = {}
+    for d in dirs:
+        for p in sorted(d.glob("*.toml")):
+            m = load_method(p)
+            methods[m.slug] = m
+    return methods
 
 
 def get_method(slug, methods_dir=None) -> SynthesisMethod:

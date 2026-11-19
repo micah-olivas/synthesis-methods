@@ -17,3 +17,7 @@ platform_type("idt_eblocks")                 # "arrayed"
 ## Adding or editing a method
 
 Add a TOML file under `src/synthesis_methods/data/methods/`, keyed by its filename slug. Each file has four sections: `[meta]`, `[capabilities]`, `[simulation]`, and `[pricing]`. Copy an existing file for the shape. Record where the pricing and capability numbers came from in `[meta].notes`.
+
+## Methods kept outside the package
+
+The bundled registry holds only publicly available pricing. Methods priced from quotes or other non-public sheets go in a local directory instead: `~/.config/synthesis-methods/methods/`, or any directories listed in `SYNTHESIS_METHODS_PATH` (separated by `:`, or `;` on Windows). `load_all_methods()` reads the bundled files first, then those directories, and a file there replaces a bundled method with the same slug.
