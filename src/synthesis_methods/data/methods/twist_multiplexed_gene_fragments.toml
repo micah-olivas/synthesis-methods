@@ -2,8 +2,8 @@
 name = "Twist Multiplexed Gene Fragments"
 vendor = "Twist Bioscience"
 type = "pooled"
-date_collected = "2026-03-06"
-notes = "MGF 300-500bp. Yield: 200ng amplified DNA. TAT: 8-12 BD. From Twist Combined Price Sheet (June 2025)."
+date_collected = "2026-11-19"
+notes = "MGF 300-500bp. Yield: 200ng amplified DNA. TAT: 8-12 BD. Prices from the public Twist Multiplexed Gene Fragments Price Sheet (2024), checked against this file on 2026-11-19."
 
 [capabilities]
 seq_length_min = 301
