@@ -16,4 +16,4 @@ platform_type("idt_eblocks")                 # "arrayed"
 
 ## Adding or editing a method
 
-Add a TOML file under `src/synthesis_methods/data/methods/`, keyed by its filename slug. Each file has four sections: `[meta]`, `[capabilities]`, `[simulation]`, and `[pricing]`. Copy an existing file for the shape. Provenance for the pricing and capability numbers lives in `data/methods/sources/`.
+Add a TOML file under `src/synthesis_methods/data/methods/`, keyed by its filename slug. Each file has four sections: `[meta]`, `[capabilities]`, `[simulation]`, and `[pricing]`. Copy an existing file for the shape. Record where the pricing and capability numbers came from in `[meta].notes`.
